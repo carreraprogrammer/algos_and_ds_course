@@ -35,10 +35,7 @@ same([1,2,1], [4,4,1]) // false (must be same frequency) */
 
 // Simple examples
 
-/* same([1], [1]) // true
-same([1], [1, 1]) // false (Not the same frecuency)
-same([1, 2, 3], [1, 4, 9]) // true
-same([1, 2, 3], [1, 4, 9, 1]) // false
+/* 
 
 // Empty inputs
 
@@ -85,4 +82,8 @@ const same = (firstArray, secondArray) => {
     }
   };  
 
- console.log(same([2, 3, 6], [4, 9, 32]))
+ console.log(same([2], [4, 9, 32]))
+ console.log(same([1], [1])) // true
+ console.log(same([1], [1, 1])) // false (Not the same frecuency)
+ console.log(same([1, 2, 3], [1, 4, 9])) // true
+ console.log(same([1, 2, 3], [1, 4, 9, 1])) // false
