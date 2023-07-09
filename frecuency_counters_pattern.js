@@ -56,34 +56,23 @@ same([1, 2, 3], "This is a string!!") // error */
   // else
   // return false
 
-const same = (firstArray, secondArray) => {
-    if (Array.isArray(firstArray) && Array.isArray(secondArray)) {
-      let matchFirst = []
-      let matchSecond = []
-
-      firstArray.forEach(
-        function(number) {
-          for(let i = 0; i < secondArray.length; i ++) {
-            if(number ** 2 === secondArray[i]) {
-              matchFirst.push(number)
-              matchSecond.push(secondArray[i])
-            }
-          }
-        }
-      )
-
-      if (firstArray.join('') == matchFirst.join('') && secondArray.join('') == matchSecond.join('')) {
-        return true;
-      } else {
-        return false;
-      }
-    } else {
-      throw new Error("Please, insert arrays as arguments !");
+function same(arr1, arr2){
+  if(arr1.length !== arr2.length){
+    return false;
+  }
+  for(let i = 0; i < arr1.length; i++){
+    let correctIndex = arr2.indexOf(arr1[i] ** 2)
+    if(correctIndex === -1) {
+      return false;
     }
-  };  
+      arr2.splice(correctIndex,1)
+    }
+    return true
+}
 
  console.log(same([2], [4, 9, 32]))
  console.log(same([1], [1])) // true
  console.log(same([1], [1, 1])) // false (Not the same frecuency)
  console.log(same([1, 2, 3], [1, 4, 9])) // true
  console.log(same([1, 2, 3], [1, 4, 9, 1])) // false
+ console.log(same([1, 2, 3], [9, 4, 1]))
