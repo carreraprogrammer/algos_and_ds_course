@@ -2,8 +2,8 @@
 
 
 const validAnagram = (str1, str2) => {
-   frequency_counter_str1 = {}
-   frequency_counter_str2 = {}
+   let frequencyCounterStr1 = {}
+   let frequencyCounterStr2 = {}
    let arr1 = str1.split('')
    let arr2 = str2.split('')
 
@@ -12,19 +12,19 @@ const validAnagram = (str1, str2) => {
    }
 
    arr1.forEach((str) => {
-    frequency_counter_str1[str] = (frequency_counter_str1[str] || 0) + 1
-    return frequency_counter_str1
+    frequencyCounterStr1[str] = (frequencyCounterStr1[str] || 0) + 1
+    return frequencyCounterStr1
    })
 
    arr2.forEach((str) => {
-    frequency_counter_str2[str] = (frequency_counter_str2[str] || 0) + 1
-    return frequency_counter_str2
+    frequencyCounterStr2[str] = (frequencyCounterStr2[str] || 0) + 1
+    return frequencyCounterStr2
    })
 
-   for(let key in frequency_counter_str1) {
-    if(!frequency_counter_str2[key]) {
+   for(let key in frequencyCounterStr1) {
+    if(!frequencyCounterStr2[key]) {
       return false
-    } else if(frequency_counter_str1[key] != frequency_counter_str2[key]){
+    } else if(frequencyCounterStr1[key] != frequencyCounterStr2[key]){
       return false
     }
    }
