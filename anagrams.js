@@ -40,4 +40,32 @@ console.log(validAnagram('awesome', 'awesom')) // false
 console.log(validAnagram('qwerty', 'qeywrt')) // true
 console.log(validAnagram('texttwisttime', 'timetwisttext')) // true
 
-const refactorize_valid_anagram = (str1, str2) 
+const RefactorizeValidAnagram = (str1, str2) => {
+  let lookup = {}
+
+  if(str1.length != str2.length) {
+    return false
+  }
+
+  str1.forEach((letter) => {
+    lookup[letter] = (lookup[letter] || 0) + 1
+  })
+
+  for (let letter in str2) {
+    if(!lookup[letter])  {
+      return false
+    } else {
+      lookup[letter] --
+    }
+  }
+
+  return false
+}
+
+console.log(validAnagram('', ''))// true
+console.log(validAnagram('aaz', 'zza')) // false
+console.log(validAnagram('anagram', 'nagaram')) // true
+console.log(validAnagram("rat","car")) // false
+console.log(validAnagram('awesome', 'awesom')) // false
+console.log(validAnagram('qwerty', 'qeywrt')) // true
+console.log(validAnagram('texttwisttime', 'timetwisttext')) // true
