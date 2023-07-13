@@ -39,3 +39,5 @@ console.log(validAnagram("rat","car")) // false
 console.log(validAnagram('awesome', 'awesom')) // false
 console.log(validAnagram('qwerty', 'qeywrt')) // true
 console.log(validAnagram('texttwisttime', 'timetwisttext')) // true
+
+const refactorize_valid_anagram = (str1, str2) 
