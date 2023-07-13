@@ -34,3 +34,33 @@ puts valid_anagram("rat","car") # => false
 puts valid_anagram('awesome', 'awesom') # => false
 puts valid_anagram('qwerty', 'qeywrt') # => true
 puts valid_anagram('texttwisttime', 'timetwisttext') # => true
+
+def refactorize_valid_anagram(str1, str2)
+  #if the anagrams have a diferent length, it should return false
+
+  lookup = Hash.new(0)
+  arr_str_1 = str1.split('')
+  arr_str_2 = str2.split('')
+  
+  if arr_str_1.length != str2.length
+    return false
+  end
+
+  arr_str_1.each do | letter |
+    lookup[letter] += 1
+  end
+
+  arr_str_2.each do | letter |
+    if lookup[letter] <= 0
+      return false
+    else
+      lookup[letter] -= 1
+    end
+  end
+
+  
+  
+  return true
+end
+
+puts refactorize_valid_anagram('hello', 'lloje')
