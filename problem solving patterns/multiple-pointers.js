@@ -27,7 +27,7 @@ function refactorizedSumZero(arr){
 
   while(pointerLeft < pointerRight) {
     if(arr[pointerLeft] + arr[pointerRight] === 0) {
-      return [array[pointerLeft], array[pointerRight]]
+      return [arr[pointerLeft], arr[pointerRight]]
     } else {
       pointerLeft ++
       pointerRight --
