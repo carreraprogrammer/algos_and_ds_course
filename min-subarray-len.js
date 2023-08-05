@@ -1,6 +1,6 @@
 function minSubArrayLen(nums, sum) {
 // [1, 2, 3, 4, 5], 9
-//     i     j
+//        i  j
 // los dos indexes empiezan en la misma posicion
 // mi total va a sumar cada numero del arr hasta que total < sum, usando el index end siempre y cuando total sea < sum
 // si mi total es >= sum, significa que puedo reducir la brecha y aumentar mi start para buscar un array mas pequeno
@@ -10,24 +10,26 @@ function minSubArrayLen(nums, sum) {
 // Si mi nuevo end-start es menor a mi current minLength, se asignara ese valor a mi current minLength
 
 let start = 0;
-let end = 0;
-let total = 0;
-let minLength = Infinity;
+let end = 0; // Have the responsatbility to accumulate the total sum of my sub array
+let acc = 0;
+let minLength = Infinity
 
-  while(start < nums.length) {
-    if(total < sum && end < nums.length) {
-      total += nums[end]
-      end ++
-    } else if(total >= sum) {
-      minLength = Math.min(minLength, end-start)
-      total = total - nums[start]
-      start ++
-    } else {
-      break
-    }
-  }
+while(start < nums.length) {
+  if(end < nums.length && acc < sum) {
+    acc += nums[end]
+    end ++
+    //  [1 + 2 + 3 + 4 ] = 10 // first window
+  } else if(acc >= sum){// search other window
+    minLength = Math.min(minLength, end - start) // 2
+    acc = acc - nums[start] // [  3 + 4 ] 
+    start ++ // [3 + 4 + 5]
+  } else {
+    break
+  } // to stop my algorithms need two conditions: first end < nums.length and then acc < sum. If acc is always < sum, it doesn't matters if my end > arr.length, the loop is gonna be executed for ever
+}
 
-  console.log(minLength === Infinity ? 0 : minLength)
+return console.log(minLength === Infinity ? 0 : minLength)
+
 }
 
 minSubArrayLen([2,3,1,2,4,3], 7) // 2 -> because [4,3] is the smallest subarray
