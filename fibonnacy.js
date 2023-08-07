@@ -18,3 +18,18 @@ console.log(fib(5))
 console.log(fib(10)) // 55
 console.log(fib(28)) // 317811
 console.log(fib(35)) // 9227465
+
+function noRecursiveFib(n) {
+  if (n <= 2) return 1;
+
+  let prev = 1;
+  let current = 1;
+
+  for (let i = 3; i <= n; i++) {
+    const next = prev + current;
+    prev = current;
+    current = next;
+  }
+
+  return current;
+}
