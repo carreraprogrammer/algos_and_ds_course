@@ -1,15 +1,12 @@
-function stringifyNumbers(obj) {
-  var newObj = {};
-  for (var key in obj) {
-    if (typeof obj[key] === 'number') {
-      newObj[key] = obj[key].toString();
-    } else if (typeof obj[key] === 'object' && !Array.isArray(obj[key])) {
-      newObj[key] = stringifyNumbers(obj[key]);
-    } else {
-      newObj[key] = obj[key];
+const stringifyNumbers  = (obj) => {
+  for (let key in obj) {
+    if (Number.isInteger(obj[key])) {
+      obj[key] = obj[key].toString();
+    } else if (typeof obj[key] === 'object') {
+      stringifyNumbers(obj[key]);
     }
   }
-  return newObj;
+  return obj;
 }
 
 /*
