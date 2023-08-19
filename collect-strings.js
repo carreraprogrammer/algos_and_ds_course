@@ -1,13 +1,17 @@
 const collectStrings = (object) => {
   let stringsCollector = []
 
-  for (let key in object) {
-    if (typeof object[key] === "string") {
-      stringsCollector.push(object[key])
-    } else if (typeof object[key] === "object") {
-      stringsCollector = stringsCollector.concat(collectStrings(object[key]))
+  function selectStrings (obj) {
+    for(let key in obj) {
+      if(typeof obj[key] === "string") {
+        stringsCollector.push(obj[key])
+      } else if(typeof obj[key] === "object") {
+        selectStrings(obj[key])
+      }
     }
   }
+
+  selectStrings(object)
 
   return stringsCollector
 }
