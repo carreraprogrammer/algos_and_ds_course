@@ -9,22 +9,22 @@
 // Solution
 
 const maxSubarraySum = (arr, num) => {
-  let maxSum = 0;
-  let tempSum = 0;
+  let accumulator = 0;
+  let maxSum = - Infinity
 
-  if(arr.length < num) {
-    return null
+  if(num > arr.length) return null;
+
+  // Sum of the first num numbers to create first window
+
+  for(let i = 0; i < num; i++ ) {
+    accumulator += arr[i]
   }
 
-  for(let i = 0; i < num; i ++) {
-    maxSum += arr[i]
-  }
+  maxSum = accumulator;
 
-  tempSum = maxSum 
-
-  for(let i = num; i < arr.length; i ++) {
-    tempSum = tempSum - arr[ i - num] + arr[i]
-    maxSum = Math.max(tempSum, maxSum)
+  for(let j = num; j < arr.length; j ++) {
+    accumulator = accumulator - arr[j - num] + arr[j]
+    maxSum = Math.max(accumulator, maxSum)
   }
 
   return maxSum
