@@ -35,7 +35,6 @@ const maxSubarraySum = (arr, num) => {
 console.log(maxSubarraySum([1, 2, 3], 2) )// 5
 console.log(maxSubarraySum([], 2)) // null
 console.log(maxSubarraySum([1, 2, 3], 4) )// null
-
 console.log(maxSubarraySum([1,2,5,2,8,1,5], 2)) // 10
 console.log(maxSubarraySum([1,2,5,2,8,1,5],4)) // 17
 console.log(maxSubarraySum([4,2,1,6],1)) // 6
