@@ -1,52 +1,36 @@
 function minSubArrayLen(nums, sum) {
-  // What's my input
-  // An array of numbers
-  // Sum
-  // What's my output
-  // Length of the min array that is more or equal to the sum
-  // I'm looking the shortest consecutive array which sum is more or equal that my sum argument
+// [1, 2, 3, 4, 5], 9
+//        i  j
+// los dos indexes empiezan en la misma posicion
+// mi total va a sumar cada numero del arr hasta que total < sum, usando el index end siempre y cuando total sea < sum
+// si mi total es >= sum, significa que puedo reducir la brecha y aumentar mi start para buscar un array mas pequeno
+// cuando mi total es >= sum, voy a guardar el length en minLen, que es la resta de mi end - start
+// este proceso se repite indefinidamente hasta que mi start cubra el arr length
+// en cada paso se compara el valor minimo entre mi current minLength y mi nuevo end-start
+// Si mi nuevo end-start es menor a mi current minLength, se asignara ese valor a mi current minLength
 
-  let minSubArrayLen = +Infinity // Every value should be less than infinity
-  let acc = 0
-  let i = 0;
-  let j = 0;
-  // [1,3,2,7] wich sub array is more or less than 5
-  //  i j      1 + 3 = 4
-  //  i   j    1 + 3 + 2 = 6
-  //  i     j  1 + 3 + 2 + 7 = 13  I FOUND A SUB ARRAY
-  //    i   j  3 + 2 + 7 = 12 I FOUND OTHER SUB ARRAY
-  //      i j  2 + 7 = 9 I FOUND OTHER SUB ARRAY
-  //        ij 7 = 7 I FOUND OTHER SUB ARRAY
+let start = 0;
+let end = 0; // Have the responsatbility to accumulate the total sum of my sub array
+let acc = 0;
+let minLength = Infinity
 
-
- 
-  while(j < nums.length) {
-    acc += nums[j]
-     // if my current subArray.sum < 5 
-    if (acc < sum) {
-     // j ++ 
-      j ++
-    } else if(acc > sum && i < nums.length) {// else if subArray.sum >= 5
-      // compare my current subArrayLength my previous subArrayLength
-      minSubArrayLen = Math.min(minSubArrayLen, j - i)
-      console.log("current")
-      console.log(j - i)
-      console.log("previous")
-      console.log(minSubArrayLen)
-      // i ++ 
-      i ++
-    } else {
-      break;
-    }
-  }
-  
-  return minSubArrayLen
-   
+while(start < nums.length) {
+  if(end < nums.length && acc < sum) {
+    acc += nums[end]
+    end ++
+    //  [1 + 2 + 3 + 4 ] = 10 // first window
+  } else if(acc >= sum){// search other window
+    minLength = Math.min(minLength, end - start) // 2
+    acc = acc - nums[start] // [  3 + 4 ] 
+    start ++ // [3 + 4 + 5]
+  } else {
+    break
+  } // to stop my algorithms need two conditions: first end < nums.length and then acc < sum. If acc is always < sum, it doesn't matters if my end > arr.length, the loop is gonna be executed for ever
 }
 
-// Simple cases
+return console.log(minLength === Infinity ? 0 : minLength)
 
-console.log(minSubArrayLen([1,3,2,7], 5)) // 1, because [7] is more than 5
+}
 
 minSubArrayLen([2,3,1,2,4,3], 7) // 2 -> because [4,3] is the smallest subarray
 minSubArrayLen([2,1,6,5,4], 9) // 2 -> because [5,4] is the smallest subarray
