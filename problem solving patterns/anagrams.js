@@ -2,64 +2,25 @@
 
 
 const validAnagram = (str1, str2) => {
-   let frequencyCounterStr1 = {}
-   let frequencyCounterStr2 = {}
-   let arr1 = str1.split('')
-   let arr2 = str2.split('')
+  // This should return a boolean
 
-   if(str1.length != str2.length) {
-     return false
-   }
+  if (str1.length !== str2.length) return false;
 
-   arr1.forEach((str) => {
-    frequencyCounterStr1[str] = (frequencyCounterStr1[str] || 0) + 1
-    return frequencyCounterStr1
-   })
+  const frequencyCounter = {}
+  const wordsArr = str1.split('')
 
-   arr2.forEach((str) => {
-    frequencyCounterStr2[str] = (frequencyCounterStr2[str] || 0) + 1
-    return frequencyCounterStr2
-   })
-
-   for(let key in frequencyCounterStr1) {
-    if(!frequencyCounterStr2[key]) {
-      return false
-    } else if(frequencyCounterStr1[key] != frequencyCounterStr2[key]){
-      return false
-    }
-   }
-
-   return true
-}
-
-console.log(validAnagram('', ''))// true
-console.log(validAnagram('aaz', 'zza')) // false
-console.log(validAnagram('anagram', 'nagaram')) // true
-console.log(validAnagram("rat","car")) // false
-console.log(validAnagram('awesome', 'awesom')) // false
-console.log(validAnagram('qwerty', 'qeywrt')) // true
-console.log(validAnagram('texttwisttime', 'timetwisttext')) // true
-
-const RefactorizeValidAnagram = (str1, str2) => {
-  let lookup = {}
-
-  if(str1.length != str2.length) {
-    return false
-  }
-
-  str1.forEach((letter) => {
-    lookup[letter] = (lookup[letter] || 0) + 1
+  wordsArr.forEach(l => {
+    frequencyCounter[l] = (frequencyCounter[l] || 0) + 1
   })
-
-  for (let letter in str2) {
-    if(!lookup[letter])  {
+  
+  for (let l of str2) {
+    if(!frequencyCounter[l])  {
       return false
     } else {
-      lookup[letter] --
+      frequencyCounter[l] --
     }
   }
-
-  return false
+  return true
 }
 
 console.log(validAnagram('', ''))// true
