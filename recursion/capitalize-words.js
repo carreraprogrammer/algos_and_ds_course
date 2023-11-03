@@ -1,18 +1,22 @@
 let capitalizeWords = (arr) => {
-  let newArr = []
 
-  let capitalizeHelper = (arrOfStrings) => {
+  if (arr.length === 0) return;
 
-    if(arrOfStrings.length === 0 ) return;
-    let capitalizedString = arrOfStrings[0].toUpperCase()
-    newArr.push(capitalizedString)
-    let filteredArray = arrOfStrings.filter((word) => word != arrOfStrings[0])
-    capitalizeHelper(filteredArray)
+  // should return an array with capitalized words
+  let wordsArray = []
+
+  const capitalizeHelper = (arr) => {
+    if (arr.length === 0) return;
+    const firstWord = arr[0].split('')
+    const capitalizedWord = firstWord.map((l) => l.toUpperCase())
+    wordsArray.push(capitalizedWord.join(''))
+    const filteredArr = arr.filter((word) => word !== arr[0])
+    capitalizeHelper(filteredArr);
   }
 
   capitalizeHelper(arr)
 
-  return newArr
+  return wordsArray;
 }
 
 console.log(capitalizeWords(["hello", "bye", "adios"]))
