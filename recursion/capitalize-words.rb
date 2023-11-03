@@ -1,19 +1,28 @@
-def capitalize_helper(arr, new_array)
+def capitalize_words arr
+
+  capitalized_arr = []
+ 
   if arr.length == 0
     return
   end
-  capitalized_word = arr[0].upcase
-  filtered_array = arr.slice(1, arr.length - 1)
-  new_array.push(capitalized_word)
-  capitalize_helper(filtered_array, new_array)
-end
+  
+  def capitalize_helper(arr, newArr)
 
-def capitalize_words(arr)
-  new_array = []
+    if arr.length == 0
+      return
+    end
 
-  capitalize_helper(arr, new_array)
+    capitalized_word = arr[0].upcase
+    newArr.push(capitalized_word)
 
-  return new_array
+    filtered_arr = arr.slice(1..-1)
+
+    capitalize_helper(filtered_arr, newArr)
+  end
+
+  capitalize_helper(arr, capitalized_arr)
+
+  return capitalized_arr
 end
 
 p capitalize_words(["hello", "bye", "adios"])
