@@ -2,24 +2,26 @@
 
 
 const validAnagram = (str1, str2) => {
-  // This should return a boolean
-
+  
   if (str1.length !== str2.length) return false;
 
-  const frequencyCounter = {}
-  const wordsArr = str1.split('')
+  // This should return a boolean
+  const arrStr1 = str1.split('')
+  const arrStr2 = str2.split('')
+  const freqCounter = {}
 
-  wordsArr.forEach(l => {
-    frequencyCounter[l] = (frequencyCounter[l] || 0) + 1
-  })
-  
-  for (let l of str2) {
-    if(!frequencyCounter[l])  {
+  for (let l of arrStr1) {
+    freqCounter[l] = (freqCounter[l] || 0) + 1
+  }
+
+  for (let l of arrStr2) {
+    if(!freqCounter[l]) {
       return false
     } else {
-      frequencyCounter[l] --
+      freqCounter[l] --
     }
   }
+  
   return true
 }
 
