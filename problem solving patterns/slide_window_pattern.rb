@@ -1,16 +1,11 @@
 def maxSubarraySum(arr, num)
   max_sum = arr[0...num].sum
 
-  if arr.length < num
-    return nil
-  end
+  window = max_sum
 
-  current_sum = max_sum
-
-  arr[num..-1].each do |element|
-    current_sum = current_sum - arr[0] + element
-    max_sum = [current_sum, max_sum].max
-    arr.shift
+  arr[num..-1].each_with_index do | num, index|
+    window = window - arr[index - num] + num
+    max_sum = [max_sum, window].max
   end
 
   max_sum
