@@ -9,25 +9,29 @@
 // Solution
 
 const maxSubarraySum = (arr, num) => {
-  if(arr.length === 0 || arr.length < num) return null;
+
+  if(arr.length < num) return null;
+  // What is the output
 
   let maxSum = -Infinity
-  let tempAccumulator = 0
+  let tempValue = 0
 
-  // sum first n arr numbers
-  for(let i = 0; i < num; i++ ) {
-    tempAccumulator += arr[i]
+  // [1, 2, 3, 4, 5], 3
+  //  i     j
+  //     6 
+  //     i     j
+  //    6 - 1 + 4
+
+  for (let i = 0; i < num; i ++){
+    tempValue = tempValue + arr[i];
   }
 
-  // start our slide window
+  maxSum = Math.max(maxSum, tempValue)
 
   for(let j = num; j < arr.length; j ++) {
+    tempValue = tempValue - arr[j - num] + arr[j]
 
-    maxSum = Math.max(maxSum, tempAccumulator)
-
-    tempAccumulator = tempAccumulator - arr[j-num] + arr[j]
-
-    
+    maxSum = Math.max(tempValue, maxSum)
   }
 
   return maxSum
