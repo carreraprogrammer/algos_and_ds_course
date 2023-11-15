@@ -5,32 +5,34 @@ Very efficient for solving problems with minimal space complexity as well */
 
 /* Write a function called sumZero which accepts a sorted array of integers. The function should find the first pair where the sum is 0. Return an array that includes both values that sum to zero or undefined if a pair does not exist */
 
-sumZero([-3,-2,-1,0,1,2,3]) // [-3,3] 
-sumZero([-2,0,1,3]) // undefined
-sumZero([1,2,3]) // undefined
 
 // NAIVE SOLUTION
 
 function sumZero(arr){
-    for(let i = 0; i < arr.length; i++){
-        for(let j = i+1; j < arr.length; j++){
-            if(arr[i] + arr[j] === 0){
-                return [arr[i], arr[j]];
-            }
-        }
-    }
-}
+  let start = 0
+  let end = arr.length - 1;
+  let response;
 
-function refactorizedSumZero(arr){
-  let pointerLeft = 0
-  let pointerRight = arr.length -1
+  // [-1, 2, 2, 3, 4, 5]
+  //   ij
+  //  My end point, should be always more than my start point 
+  //  If the interval is more than 0, move the end --
+  // If the interval is less than 0, move the start ++
 
-  while(pointerLeft < pointerRight) {
-    if(arr[pointerLeft] + arr[pointerRight] === 0) {
-      return [arr[pointerLeft], arr[pointerRight]]
+  while( end > start) {
+    if(arr[end] + arr[start] > 0) {
+      end --
+    } else if(arr[end] + arr[start] < 0){
+      start ++
     } else {
-      pointerLeft ++
-      pointerRight --
+      response = [arr[end], arr[start]]
+      break
     }
   }
+  return response
 }
+
+
+console.log(sumZero([-3,-2,-1,0,1,2,3])) // [-3,3] 
+console.log(sumZero([-2,0,1,3])) // undefined
+console.log(sumZero([1,2,3])) // undefined
